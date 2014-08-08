@@ -1,3 +1,6 @@
+include:
+  - git
+
 {% set os = salt['grains.get']('os') %}
 {% set users = salt['pillar.get']('vim:users', []) %}
 {% set pkgdefault = { 
@@ -8,8 +11,9 @@
 vim.installed:
   pkg.latest:
     - name: {{ pkgname }}
-  {% if users %}
   require:
+    - git
+  {% if users %}
     {% for user in users %}
     - sls: vimrc-{{ user }}
     - sls: vimconfig-{{ user }}
