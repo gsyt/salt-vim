@@ -7,11 +7,15 @@ Requirements
 ------------
 The following pillars *should* exist:
   * vim:users
-  * vim:pkg:name
+  * vim:pkg:'salt['pillar.get']('os')
+The following states **must** exist;
+  * git
 
 Usage
 -----
-Apply state 'vim' to target minions
+Apply state 'vim.install' to install to target minions
+Apply state 'vim.purge' to remove from target minions
+State 'vim' is provided as an alias for 'vim.install'
 
 Compatibility
 -------------
