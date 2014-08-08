@@ -19,4 +19,4 @@ State 'vim' is provided as an alias for 'vim.install'
 
 Compatibility
 -------------
-Ubuntu 14.04 and CentOS 6.x
+Ubuntu 13.10, 14.04 and CentOS 6.x
