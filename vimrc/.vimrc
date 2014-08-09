@@ -30,17 +30,6 @@ NeoBundle 'nelstrom/vim-qargs'
 NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'vim-scripts/indent-motion'
 NeoBundle 'rodjek/vim-puppet'
-"NeoBundle 'L9'
-"NeoBundle 'taglist.vim'
-"NeoBundle 'majutsushi/tagbar'
-"NeoBundle 'skalnik/vim-vroom'
-"NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'scrooloose/nerdcommenter'
-"NeoBundle 'scrooloose/nerdtree'
-"NeoBundle 'Lokaltog/vim-easymotion'
-"NeoBundle 'lucapette/vim-ruby-doc'
-"NeoBundle 'derekwyatt/vim-scala'
-"NeoBundle 'vim-scripts/vim-addon-mw-utils'
 
 NeoBundleCheck
 
@@ -48,8 +37,9 @@ filetype plugin indent on
 
 " Custom settings
 set expandtab
-set shiftwidth=2
+set tabstop=2
 set softtabstop=2
+set shiftwidth=2
 set autoindent
 set incsearch
 set number
