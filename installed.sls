@@ -1,6 +1,3 @@
-include:
-  - git
-
 {% set os = salt['grains.get']('os') %}
 {% set users = salt['pillar.get']('vim:users', []) %}
 {% set pkgdefault = { 
@@ -11,9 +8,8 @@ include:
 vim.installed:
   pkg.latest:
     - name: {{ pkgname }}
-  require:
-    - git
   {% if users %}
+  require:
     {% for user in users %}
     - sls: vimrc-{{ user }}
     - sls: vimconfig-{{ user }}
@@ -30,6 +26,7 @@ vimconfig-{{ user }}:
 vimrc-{{ user }}:
   file.managed:
     - name: {{ userhome }}/.vimrc
+    - source: salt://vim/vimrc/.vimrc
     - user: {{ user }}
   require:
     - sls: neobundle-{{ user }}
