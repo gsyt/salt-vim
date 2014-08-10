@@ -26,7 +26,7 @@ vimconfig-{{ user }}:
 vimrc-{{ user }}:
   file.managed:
     - name: {{ userhome }}/.vimrc
-    - source: salt://vim/vimrc/.vimrc
+    - source: salt://vim/conf/.vimrc
     - user: {{ user }}
   require:
     - sls: neobundle-{{ user }}
