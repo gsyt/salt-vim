@@ -8,8 +8,6 @@ Requirements
 The following pillars *should* exist:
   * vim:users
   * vim:pkg:'salt['pillar.get']('os')
-The following states **must** exist;
-  * git
 
 Usage
 -----
