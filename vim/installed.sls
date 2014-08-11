@@ -19,7 +19,7 @@ vim.installed:
   {% endif -%}
 
 {% for user in users -%}
-  {% set userhome = salt['user.info'](user).home -%}
+{% set userhome = salt['user.info'](user).home -%}
 vimconfig-{{ user }}:
   file.append:
     - name: {{ userhome }}/.bashrc
@@ -33,11 +33,11 @@ vimrc-{{ user }}:
   require:
     - sls: neobundle-{{ user }}
 
-  {% if confsrc == confdefault -%}
+{% if confsrc == confdefault -%}
 neobundle-{{ user }}:
   git.latest:
     - name: https://github.com/Shougo/neobundle.vim
     - target: {{ userhome }}/.vim/bundle/neobundle.vim
     - user: {{ user }}
-  {% endif -%}
+{% endif -%}
 {% endfor -%}
