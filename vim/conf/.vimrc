@@ -30,6 +30,7 @@ NeoBundle 'nelstrom/vim-qargs'
 NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'vim-scripts/indent-motion'
 NeoBundle 'rodjek/vim-puppet'
+NeoBundle 'saltstack/salt-vim'
 
 NeoBundleCheck
 
