@@ -2,7 +2,7 @@
 {%- set users = salt['pillar.get']('vim:users', []) -%}
 {%- set pkgdefault = { 
   'Ubuntu': 'vim-nox', 
-  'RedHat': 'vim-enhanced' } -%}
+  'CentOS': 'vim-enhanced' } -%}
 {%- set pkgname = salt['pillar.get']('vim:pkg:' ~ os, pkgdefault[os]) -%}
 {%- set confdefault =  'salt://vim/conf/.vimrc' -%}
 {%- set confsrc = salt['pillar.get']('vim:conf', confdefault) -%}
