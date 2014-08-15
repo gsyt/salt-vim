@@ -1,0 +1,8 @@
+{% set vim = salt['grains.filter_by']( {
+  'Debian': {
+    'package': 'vim-nox',
+  },
+  'RedHat': {
+    'package': 'vim-enhanced',
+  },
+}, merge=salt['pillar.get']('vim:lookup')) %}

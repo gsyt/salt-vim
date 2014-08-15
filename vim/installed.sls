@@ -1,25 +1,30 @@
-{%- set os = salt['grains.get']('os') -%}
-{%- set users = salt['pillar.get']('vim:users', []) -%}
-{%- set pkgdefault = { 
-  'Ubuntu': 'vim-nox', 
-  'CentOS': 'vim-enhanced' } -%}
-{%- set pkgname = salt['pillar.get']('vim:pkg:' ~ os, pkgdefault[os]) -%}
-{%- set confdefault =  'salt://vim/conf/.vimrc' -%}
-{%- set confsrc = salt['pillar.get']('vim:conf', confdefault) -%}
+{% from "vim/map.jinja" import vim with context %}
+
+{% set package = {
+  'upgrade': salt['pillar.get']('vim:package:upgrade', False),
+} %}
+
+{%- set config = {
+  'manage': salt['pillar.get']('vim:config:manage', False),
+  'neobundle': salt['pillar.get']('vim:config:neobundle', True),
+  'users': salt['pillar.get']('vim:config:users', []),
+  'source': salt['pillar.get']('vim:config:source', 'salt://vim/conf/.vimrc'),
+} %}
 
 vim.installed:
-  pkg.latest:
-    - name: {{ pkgname }}
-  {% if users %}
+  pkg.{{ 'latest' if package.upgrade else 'installed' }}:
+    - name: {{ vim.package }}
+  {% if config.users %}
   require:
-    {% for user in users %}
+    {% for user in config.users %}
     - sls: vimrc-{{ user }}
     - sls: vimconfig-{{ user }}
     {% endfor %}
   {% endif %}
 
-{% for user in users %}
-{% set userhome = salt['user.info'](user).home %}
+{% if config.manage %} 
+  {% for user in config.users %}
+    {% set userhome = salt['user.info'](user).home %}
 vimconfig-{{ user }}:
   file.append:
     - name: {{ userhome }}/.bashrc
@@ -28,16 +33,17 @@ vimconfig-{{ user }}:
 vimrc-{{ user }}:
   file.managed:
     - name: {{ userhome }}/.vimrc
-    - source: salt://vim/conf/.vimrc
+    - source: {{ config.source }}
     - user: {{ user }}
   require:
     - sls: neobundle-{{ user }}
 
-{% if confsrc == confdefault %}
+    {% if config.neobundle %}
 neobundle-{{ user }}:
   git.latest:
     - name: https://github.com/Shougo/neobundle.vim
     - target: {{ userhome }}/.vim/bundle/neobundle.vim
     - user: {{ user }}
+    {% endif %}
+  {% endfor %}
 {% endif %}
-{% endfor %}
