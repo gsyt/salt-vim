@@ -1,0 +1,11 @@
+vim:
+  package:
+    upgrade: False
+  config:
+    manage: False
+    neobundle: True
+    source: salt://ntp/conf/ntp.conf
+    users:
+      - root
+  lookup:
+    package: ntp
