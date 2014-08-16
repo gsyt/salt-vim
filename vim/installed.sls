@@ -14,6 +14,7 @@
 vim.installed:
   pkg.{{ 'latest' if package.upgrade else 'installed' }}:
     - name: {{ vim.package }}
+{% if config.manage %}
   {% if config.users %}
   require:
     {% for user in config.users %}
@@ -21,6 +22,7 @@ vim.installed:
     - sls: vimconfig-{{ user }}
     {% endfor %}
   {% endif %}
+{% endif %}
 
 {% if config.manage %} 
   {% for user in config.users %}
