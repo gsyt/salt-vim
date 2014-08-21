@@ -1,3 +1,6 @@
+include:
+  - git.installed
+
 {% from "vim/map.jinja" import vim with context %}
 
 {% set package = {
@@ -46,6 +49,8 @@ neobundle-{{ user }}:
     - name: https://github.com/Shougo/neobundle.vim
     - target: {{ userhome }}/.vim/bundle/neobundle.vim
     - user: {{ user }}
+  require:
+    - sls: git
     {% endif %}
   {% endfor %}
 {% endif %}

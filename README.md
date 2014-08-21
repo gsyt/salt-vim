@@ -7,6 +7,10 @@ Parameters
 ------------
 Please refer to example.pillar for a list of available pillar configuration options
 
+Requirements
+------------
+git state is required for vim:config:manage = True
+
 Usage
 -----
 Apply state 'vim.install' to install to target minions
