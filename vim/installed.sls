@@ -1,4 +1,5 @@
 include:
+  - users
   - git.installed
 
 {% from "vim/map.jinja" import vim with context %}
@@ -15,21 +16,27 @@ include:
 } %}
 
 vim.installed:
+  require:
+    - sls: vim.install
+    - sls: vim.configure
+
+vim.install:
   pkg.{{ 'latest' if package.upgrade else 'installed' }}:
     - name: {{ vim.package }}
+
+vim.configure:
+  require:
+    - sls: vim.install
 {% if config.manage %}
   {% if config.users %}
-  require:
     {% for user in config.users %}
     - sls: vimrc-{{ user }}
     - sls: vimconfig-{{ user }}
     {% endfor %}
-  {% endif %}
-{% endif %}
 
-{% if config.manage %} 
-  {% for user in config.users %}
-    {% set userhome = salt['user.info'](user).home %}
+    {% for user in config.users %}
+      {% if salt['user.info'](user) %}
+        {% set userhome = salt['user.info'](user).home %}
 vimconfig-{{ user }}:
   file.append:
     - name: {{ userhome }}/.bashrc
@@ -43,7 +50,7 @@ vimrc-{{ user }}:
   require:
     - sls: neobundle-{{ user }}
 
-    {% if config.neobundle %}
+        {% if config.neobundle %}
 neobundle-{{ user }}:
   git.latest:
     - name: https://github.com/Shougo/neobundle.vim
@@ -51,6 +58,8 @@ neobundle-{{ user }}:
     - user: {{ user }}
   require:
     - sls: git
-    {% endif %}
-  {% endfor %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 {% endif %}
