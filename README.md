@@ -15,7 +15,7 @@ Usage
 -----
 - Apply state 'vim.install' to install to target minions
 - Apply state 'vim.purge' to remove from target minions
-State 'vim' is provided as an alias for 'vim.install'
+- State 'vim' is provided as an alias for 'vim.install'
 
 Compatibility
 -------------

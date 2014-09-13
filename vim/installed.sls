@@ -1,5 +1,4 @@
 include:
-  - users
   - git.installed
 
 {% from "vim/map.jinja" import vim with context %}
