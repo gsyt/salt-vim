@@ -1,16 +1,14 @@
-" NeoVundle Settings
+if !1 | finish | endif
+
 if has('vim_starting')
   set nocompatible
-  set rtp+=~/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 filetype off
-
-call neobundle#rc(expand('~/.vim/bundle/'))
-
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" My Bundles here:
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'tpope/vim-unimpaired'
@@ -32,11 +30,12 @@ NeoBundle 'vim-scripts/indent-motion'
 NeoBundle 'rodjek/vim-puppet'
 NeoBundle 'saltstack/salt-vim'
 
+call neobundle#end()
+
 NeoBundleCheck
 
 filetype plugin indent on
 
-" Custom settings
 set expandtab
 set tabstop=2
 set softtabstop=2
@@ -46,11 +45,9 @@ set incsearch
 set number
 set hidden
 
-" Taglist settings
 let Tlist_Use_Right_Window=1
 nmap <F7> :TlistToggle<CR>
 
-" Keybindings
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 cnoremap <C-p> <Up>
