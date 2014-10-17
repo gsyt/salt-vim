@@ -7,7 +7,7 @@ include:
   'upgrade': salt['pillar.get']('vim:package:upgrade', False),
 } %}
 
-{%- set config = {
+{% set config = {
   'manage': salt['pillar.get']('vim:config:manage', False),
   'neobundle': salt['pillar.get']('vim:config:neobundle', True),
   'users': salt['pillar.get']('vim:config:users', []),
@@ -36,11 +36,6 @@ vim.configure:
     {% for user in config.users %}
       {% if salt['user.info'](user) %}
         {% set userhome = salt['user.info'](user).home %}
-vimconfig-{{ user }}:
-  file.append:
-    - name: {{ userhome }}/.bashrc
-    - text: alias vi='vim'
-
 vimrc-{{ user }}:
   file.managed:
     - name: {{ userhome }}/.vimrc
