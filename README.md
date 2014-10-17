@@ -1,6 +1,5 @@
 salt-vim
 ========
-
 Salt formula to set up and configure [VIm](http://www.vim.org/)
 
 Parameters
