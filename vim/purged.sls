@@ -14,7 +14,7 @@
 
 vim.purged:
   pkg.purged:
-    - name: {{ package }}
+    - name: {{ package.name }}
 {% if config.manage %}
   {% if config.users %}
   require:
