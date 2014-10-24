@@ -11,7 +11,7 @@ include:
   'manage': salt['pillar.get']('vim:config:manage', False),
   'neobundle': salt['pillar.get']('vim:config:neobundle', True),
   'users': salt['pillar.get']('vim:config:users', []),
-  'source': salt['pillar.get']('vim:config:source', 'salt://vim/conf/.vimrc'),
+  'source': salt['pillar.get']('vim:config:source', 'salt://vim/conf/vimrc'),
 } %}
 
 vim.installed:
