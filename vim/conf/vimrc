@@ -29,6 +29,7 @@ NeoBundle 'ekalinin/Dockerfile.vim'
 NeoBundle 'vim-scripts/indent-motion'
 NeoBundle 'rodjek/vim-puppet'
 NeoBundle 'saltstack/salt-vim'
+NeoBundle 'altercation/vim-colors-solarized'
 
 call neobundle#end()
 
